@@ -1,0 +1,20 @@
+.links {
+  color: white;
+}
+
+.links:link {
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.links:hover {
+  color: yellow;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.links:active {
+  color: yellow;
+  background-color: transparent;
+  text-decoration: none;
+}
