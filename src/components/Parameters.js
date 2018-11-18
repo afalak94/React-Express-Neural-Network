@@ -1,5 +1,15 @@
 import React, { Component } from "react";
-import { Jumbotron, Container, Table, Form, Button } from "reactstrap";
+import {
+  Jumbotron,
+  Container,
+  Table,
+  Form,
+  Button,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
+} from "reactstrap";
 import RadioBtns from "./Radios";
 
 class JumbotronParameters extends Component {
@@ -9,13 +19,18 @@ class JumbotronParameters extends Component {
       networkSize: "Calculate optimal network size automatically",
       numOfRBF: "3",
       centers: "Set random data points as centers",
-      spread: "Use equal spread"
+      spread: "Use equal spread",
+      dropdownOpen: false,
+      dropdownAvailable: false
     };
 
     this.setNetwork = this.setNetwork.bind(this);
     this.calculate = this.calculate.bind(this);
     this.setCenters = this.setCenters.bind(this);
     this.setSpread = this.setSpread.bind(this);
+    this.makeNumbers = this.makeNumbers.bind(this);
+
+    this.toggle = this.toggle.bind(this);
   }
 
   calculate() {
@@ -24,6 +39,12 @@ class JumbotronParameters extends Component {
 
   setNetwork = e => {
     const radioValue = e.target.value;
+    if (radioValue === "Manually set network size") {
+      this.setState({ dropdownAvailable: true });
+    } else {
+      this.setState({ dropdownAvailable: false });
+    }
+
     this.setState({ networkSize: radioValue }, function() {
       //console.log(this.state);
     });
@@ -42,6 +63,20 @@ class JumbotronParameters extends Component {
       //console.log(this.state);
     });
   };
+
+  toggle() {
+    this.setState(prevState => ({
+      dropdownOpen: !prevState.dropdownOpen
+    }));
+  }
+
+  makeNumbers() {
+    let children = [];
+    for (let i = 2; i < 21; i++) {
+      children.push(<DropdownItem key={i}>{i}</DropdownItem>);
+    }
+    return children;
+  }
 
   render() {
     return (
@@ -77,6 +112,39 @@ class JumbotronParameters extends Component {
                         handler={this.setNetwork}
                       />
                     </Form>
+
+                    <Dropdown
+                      isOpen={this.state.dropdownOpen}
+                      toggle={this.toggle}
+                      style={{ marginLeft: 250, marginTop: -30 }}
+                    >
+                      <DropdownToggle
+                        caret
+                        disabled={!this.state.dropdownAvailable}
+                      >
+                        Dropdown
+                      </DropdownToggle>
+                      <DropdownMenu
+                        modifiers={{
+                          setMaxHeight: {
+                            enabled: true,
+                            order: 890,
+                            fn: data => {
+                              return {
+                                ...data,
+                                styles: {
+                                  ...data.styles,
+                                  overflow: "auto",
+                                  maxHeight: 100
+                                }
+                              };
+                            }
+                          }
+                        }}
+                      >
+                        {this.makeNumbers()}
+                      </DropdownMenu>
+                    </Dropdown>
                   </td>
                 </tr>
                 <tr>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { CustomInput, FormGroup, Label } from "reactstrap";
+import "../styles/radio.css";
 
 class RadioBtns extends Component {
   render() {
@@ -10,6 +11,7 @@ class RadioBtns extends Component {
           <CustomInput
             type="radio"
             id={this.props.block + "1"}
+            className="firstRadio"
             name={this.props.block}
             label={this.props.first}
             defaultChecked
@@ -19,6 +21,7 @@ class RadioBtns extends Component {
           <CustomInput
             type="radio"
             id={this.props.block + "2"}
+            className="secondRadio"
             name={this.props.block}
             label={this.props.second}
             value={this.props.second}

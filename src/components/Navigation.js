@@ -28,12 +28,12 @@ class Navigation extends Component {
     return (
       <div>
         <Navbar light expand="md" style={{ backgroundColor: "#0083ff" }}>
-          <NavbarBrand href="/">
+          <NavbarBrand href="/" style={{ fontSize: 20, marginLeft: 136 }}>
             Radial Basis Function Neural Network
           </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
+            <Nav className="ml-auto" navbar style={{ marginRight: 136 }}>
               <NavItem>
                 <ModalExample buttonLabel="Quick Start" />
               </NavItem>
@@ -45,7 +45,7 @@ class Navigation extends Component {
               <NavItem>
                 <NavLink
                   href="https://github.com/reactstrap/reactstrap"
-                  style={{ color: "#262626" }}
+                  style={{ color: "black" }}
                 >
                   GitHub
                 </NavLink>

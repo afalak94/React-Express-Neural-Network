@@ -11,10 +11,20 @@
   color: yellow;
   background-color: transparent;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .links:active {
   color: yellow;
   background-color: transparent;
   text-decoration: none;
+}
+
+.myModal {
+  width: 80vw !important;
+  max-width: 80vw !important;
+}
+
+.embed-responsive {
+  margin-left: 200px;
 }
