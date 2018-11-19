@@ -1,15 +1,12 @@
 import React, { Component } from "react";
 import Octicon from "react-octicon";
 import { Input } from "reactstrap";
-import ReactFileReader from "react-file-reader";
 import "../styles/loadBtn.css";
 
 export default class LoadBtn extends Component {
   constructor(props) {
     super(props);
-    this.state = { toggled: false, csv: "" };
-    this.handleClick = this.handleClick.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.state = { toggled: false, csv: undefined };
   }
 
   handleClick() {
@@ -18,28 +15,27 @@ export default class LoadBtn extends Component {
     });
   }
 
-  putContent(fileContent) {
-    this.setState({
-      content: fileContent
-    });
-  }
-
-  handleFiles = files => {
-    var reader = new FileReader();
-    reader.onload = function(e) {
-      // Use reader.result
-      const fileContent = reader.result;
-    };
-    reader.readAsText(files[0]);
-  };
-
-  handleChange = event => {
-    this.setState({
-      csv: event.target.files[0]
-    });
-  };
-
   render() {
+    let fileReader;
+
+    const handleFileRead = e => {
+      const content = fileReader.result;
+      //console.log(this.state.csv);
+      this.setState({ csv: content });
+      this.props.onUpdate(content);
+      //console.log(this.state.csv);
+
+      if (this.state.csv !== undefined) {
+        this.setState({ toggled: true });
+      }
+    };
+
+    const handleFileChosen = file => {
+      fileReader = new FileReader();
+      fileReader.onloadend = handleFileRead;
+      fileReader.readAsText(file);
+    };
+
     let text = "test";
     if (this.state.toggled && text) {
       text = "Data set loaded";
@@ -48,31 +44,16 @@ export default class LoadBtn extends Component {
     }
 
     return (
-      // <div className="reader">
-      //   <ReactFileReader
-      //     handleFiles={this.handleFiles}
-      //     fileTypes={".csv"}
-      //     onChange={this.handleChange}
-      //   >
-      //     <button className="loadDatasetBtn">
-
       <label className="loadDatasetBtn">
         <Input
           type="file"
-          onChange={this.handleChange}
-          ref={input => {
-            this.filesInput = input;
-          }}
+          id="file"
+          onChange={e => handleFileChosen(e.target.files[0])}
+          //value={this.state.csv}
         />
         {text + " "}
         <Octicon mega spin name="gear" style={{ marginLeft: 5 }} />
-        {console.log(this.state.csv)}
       </label>
-
-      /* </button>
-        </ReactFileReader>
-        {console.log(this.state.csv)}
-      </div> */
     );
   }
 }

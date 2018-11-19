@@ -3,12 +3,14 @@ import "./App.css";
 import { Row, Col } from "reactstrap";
 import Navigation from "./components/Navigation";
 import LoadBtn from "./components/loadBtn";
-import JumbotronParameters from "./components/Parameters";
+import Parameters from "./components/Parameters";
 import Graph from "./components/Graph";
 import TextData from "./components/TextData";
 import ReferenceVideos from "./components/ReferenceVideos";
 import YTsearch from "youtube-api-search";
 import _ from "lodash";
+
+//API key for youtube
 const API_KEY = "AIzaSyCSfVQ46iLqj4mb6Y6VrmjbvSFfozs2_mY";
 
 class App extends Component {
@@ -20,14 +22,23 @@ class App extends Component {
       videos2: [],
       videos3: [],
       videos4: [],
-      selectedVideo: null
+      selectedVideo: null,
+      data: undefined
     };
 
     this.videoSearch("Neural networks");
     this.videoSearch("radial basis");
     this.videoSearch("6 types classification algorithms");
     this.videoSearch("statquest k means");
+
+    this.getData = this.getData.bind(this);
   }
+
+  getData = val => {
+    this.setState({ data: val }, function() {
+      //console.log(this.state.data);
+    });
+  };
 
   videoSearch(term) {
     if (term === "Neural networks") {
@@ -70,8 +81,8 @@ class App extends Component {
         <Navigation />
         <Row>
           <Col xs="6" sm={{ size: 4, offset: 1 }}>
-            <LoadBtn />
-            <JumbotronParameters />
+            <LoadBtn onUpdate={this.getData} />
+            <Parameters data={this.state.data} />
           </Col>
           <Col xs="6" sm="4">
             <Graph />

@@ -11,12 +11,7 @@ input[type="file"] {
   cursor: pointer;
   background-color: #17a2b8;
   height: 55px;
-  width: 220px;
+  width: 240px;
   font-size: 24px;
   color: white;
-}
-
-.reader {
-  width: 220px !important;
-  height: 100px;
 }

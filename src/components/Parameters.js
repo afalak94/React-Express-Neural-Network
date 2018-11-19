@@ -11,9 +11,10 @@ import {
   DropdownItem
 } from "reactstrap";
 import RadioBtns from "./Radios";
+import { PythonShell } from "python-shell";
 import "../styles/parameters.css";
 
-class JumbotronParameters extends Component {
+class Parameters extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -37,7 +38,24 @@ class JumbotronParameters extends Component {
   }
 
   calculate() {
-    console.log(this.state);
+    let options = {
+      mode: "text",
+      pythonOptions: ["-u"], // get print results in real-time
+      scriptPath: "src/engine/",
+      args: [false, true, 3, false, true, true, false, this.props.data]
+    };
+
+    const { spawn } = require("child_process");
+    const pythonProcess = spawn("RadialBasisNN.py", options);
+    pythonProcess.stdout.on("data", data => {
+      console.log(data);
+    });
+
+    // let pyshell = new PythonShell("RadialBasisNN.py", options);
+    // pyshell.on("message", function(message) {
+    //   console.log(message);
+    // });
+    //console.log(this.state);
   }
 
   setNetwork = e => {
@@ -221,4 +239,4 @@ class JumbotronParameters extends Component {
   }
 }
 
-export default JumbotronParameters;
+export default Parameters;
