@@ -1,12 +1,15 @@
 import React, { Component } from "react";
-import { Button } from "reactstrap";
 import Octicon from "react-octicon";
+import { Input } from "reactstrap";
+import ReactFileReader from "react-file-reader";
+import "../styles/loadBtn.css";
 
 export default class LoadBtn extends Component {
   constructor(props) {
     super(props);
-    this.state = { toggled: false };
+    this.state = { toggled: false, csv: "" };
     this.handleClick = this.handleClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleClick() {
@@ -15,6 +18,27 @@ export default class LoadBtn extends Component {
     });
   }
 
+  putContent(fileContent) {
+    this.setState({
+      content: fileContent
+    });
+  }
+
+  handleFiles = files => {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      // Use reader.result
+      const fileContent = reader.result;
+    };
+    reader.readAsText(files[0]);
+  };
+
+  handleChange = event => {
+    this.setState({
+      csv: event.target.files[0]
+    });
+  };
+
   render() {
     let text = "test";
     if (this.state.toggled && text) {
@@ -22,16 +46,33 @@ export default class LoadBtn extends Component {
     } else {
       text = "Load Data Set";
     }
+
     return (
-      <Button
-        color="info"
-        size="lg"
-        className="loadDatasetBtn"
-        onClick={this.handleClick}
-      >
+      // <div className="reader">
+      //   <ReactFileReader
+      //     handleFiles={this.handleFiles}
+      //     fileTypes={".csv"}
+      //     onChange={this.handleChange}
+      //   >
+      //     <button className="loadDatasetBtn">
+
+      <label className="loadDatasetBtn">
+        <Input
+          type="file"
+          onChange={this.handleChange}
+          ref={input => {
+            this.filesInput = input;
+          }}
+        />
         {text + " "}
         <Octicon mega spin name="gear" style={{ marginLeft: 5 }} />
-      </Button>
+        {console.log(this.state.csv)}
+      </label>
+
+      /* </button>
+        </ReactFileReader>
+        {console.log(this.state.csv)}
+      </div> */
     );
   }
 }

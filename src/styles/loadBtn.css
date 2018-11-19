@@ -1,0 +1,22 @@
+input[type="file"] {
+  display: none;
+}
+
+.loadDatasetBtn {
+  margin-top: 35px;
+  border-radius: 5px;
+  border-color: #17a2b8;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  background-color: #17a2b8;
+  height: 55px;
+  width: 220px;
+  font-size: 24px;
+  color: white;
+}
+
+.reader {
+  width: 220px !important;
+  height: 100px;
+}

@@ -7,7 +7,7 @@ import JumbotronParameters from "./components/Parameters";
 import Graph from "./components/Graph";
 import TextData from "./components/TextData";
 import ReferenceVideos from "./components/ReferenceVideos";
-import YTSearch from "youtube-api-search";
+import YTsearch from "youtube-api-search";
 import _ from "lodash";
 const API_KEY = "AIzaSyCSfVQ46iLqj4mb6Y6VrmjbvSFfozs2_mY";
 
@@ -31,28 +31,28 @@ class App extends Component {
 
   videoSearch(term) {
     if (term === "Neural networks") {
-      YTSearch({ key: API_KEY, term: term }, data => {
+      YTsearch({ key: API_KEY, term: term, maxResults: 1 }, data => {
         this.setState({
           videos1: data,
           selectedVideo: data[0]
         });
       });
     } else if (term === "radial basis") {
-      YTSearch({ key: API_KEY, term: term }, data => {
+      YTsearch({ key: API_KEY, term: term, maxResults: 1 }, data => {
         this.setState({
           videos2: data,
           selectedVideo: data[0]
         });
       });
     } else if (term === "6 types classification algorithms") {
-      YTSearch({ key: API_KEY, term: term }, data => {
+      YTsearch({ key: API_KEY, term: term, maxResults: 1 }, data => {
         this.setState({
           videos3: data,
           selectedVideo: data[0]
         });
       });
     } else if (term === "statquest k means") {
-      YTSearch({ key: API_KEY, term: term }, data => {
+      YTsearch({ key: API_KEY, term: term, maxResults: 1 }, data => {
         this.setState({
           videos4: data,
           selectedVideo: data[0]
@@ -65,7 +65,6 @@ class App extends Component {
     const videoSearch = _.debounce(term => {
       this.videoSearch(term);
     }, 1000);
-    console.log(this.state.videos);
     return (
       <div className="Component-Bg">
         <Navigation />

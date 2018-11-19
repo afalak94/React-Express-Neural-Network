@@ -29,7 +29,7 @@ class ModalExample extends Component {
       <div>
         <NavLink
           onClick={this.toggle}
-          style={{ color: "black", cursor: "pointer" }}
+          style={{ color: "white", cursor: "pointer" }}
         >
           {this.props.buttonLabel}
         </NavLink>

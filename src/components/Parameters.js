@@ -11,24 +11,27 @@ import {
   DropdownItem
 } from "reactstrap";
 import RadioBtns from "./Radios";
+import "../styles/parameters.css";
 
 class JumbotronParameters extends Component {
   constructor(props) {
     super(props);
     this.state = {
       networkSize: "Calculate optimal network size automatically",
-      numOfRBF: "3",
+      numOfRBF: 2,
       centers: "Set random data points as centers",
       spread: "Use equal spread",
       dropdownOpen: false,
-      dropdownAvailable: false
+      dropdownAvailable: false,
+      dropdownNumber: 2
     };
 
-    this.setNetwork = this.setNetwork.bind(this);
     this.calculate = this.calculate.bind(this);
+    this.setNetwork = this.setNetwork.bind(this);
     this.setCenters = this.setCenters.bind(this);
     this.setSpread = this.setSpread.bind(this);
     this.makeNumbers = this.makeNumbers.bind(this);
+    this.setNumber = this.setNumber.bind(this);
 
     this.toggle = this.toggle.bind(this);
   }
@@ -70,12 +73,32 @@ class JumbotronParameters extends Component {
     }));
   }
 
+  //renders numbers from 2 to 20 inside dropdown menu
   makeNumbers() {
     let children = [];
     for (let i = 2; i < 21; i++) {
-      children.push(<DropdownItem key={i}>{i}</DropdownItem>);
+      children.push(
+        <DropdownItem
+          className="dropdownItem"
+          key={i}
+          style={{ color: "white" }}
+          onClick={e => {
+            this.setNumber(e, i);
+          }}
+        >
+          {i}
+        </DropdownItem>
+      );
     }
     return children;
+  }
+
+  //Sets the chosen number for dropdown toggle text
+  setNumber(event, i) {
+    this.setState({
+      dropdownNumber: event.currentTarget.textContent,
+      numOfRBF: i
+    });
   }
 
   render() {
@@ -84,14 +107,14 @@ class JumbotronParameters extends Component {
         <Jumbotron
           fluid
           style={{
-            marginTop: 50,
+            marginTop: 30,
             height: 600,
             borderRadius: 10,
             backgroundColor: "#094771",
             color: "white"
           }}
         >
-          <Container style={{ marginTop: -50 }}>
+          <Container style={{ marginTop: -60 }}>
             <Table>
               <thead>
                 <tr>
@@ -121,8 +144,13 @@ class JumbotronParameters extends Component {
                       <DropdownToggle
                         caret
                         disabled={!this.state.dropdownAvailable}
+                        style={{
+                          minWidth: 70,
+                          backgroundColor: "#17A2B8",
+                          fontWeight: "bold"
+                        }}
                       >
-                        Dropdown
+                        {this.state.dropdownNumber}
                       </DropdownToggle>
                       <DropdownMenu
                         modifiers={{
@@ -135,7 +163,10 @@ class JumbotronParameters extends Component {
                                 styles: {
                                   ...data.styles,
                                   overflow: "auto",
-                                  maxHeight: 100
+                                  maxHeight: 100,
+                                  minWidth: 70,
+                                  maxWidth: 70,
+                                  backgroundColor: "#17A2B8"
                                 }
                               };
                             }
@@ -178,7 +209,7 @@ class JumbotronParameters extends Component {
             <Button
               color="info"
               block
-              style={{ marginTop: -40 }}
+              style={{ marginTop: -35 }}
               onClick={this.calculate}
             >
               Train and test

@@ -27,8 +27,11 @@ class Navigation extends Component {
   render() {
     return (
       <div>
-        <Navbar light expand="md" style={{ backgroundColor: "#0083ff" }}>
-          <NavbarBrand href="/" style={{ fontSize: 20, marginLeft: 136 }}>
+        <Navbar light expand="md" style={{ backgroundColor: "#094771" }}>
+          <NavbarBrand
+            href="/"
+            style={{ fontSize: 20, marginLeft: 136, color: "white" }}
+          >
             Radial Basis Function Neural Network
           </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
@@ -45,7 +48,7 @@ class Navigation extends Component {
               <NavItem>
                 <NavLink
                   href="https://github.com/reactstrap/reactstrap"
-                  style={{ color: "black" }}
+                  style={{ color: "white" }}
                 >
                   GitHub
                 </NavLink>
