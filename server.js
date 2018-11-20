@@ -18,7 +18,7 @@ app.get("/api/customers", (req, res) => {
 
 app.post("/calculate", (req, res) => {
   const data = req.body;
-  res.send(data);
+  res.send(data.allData);
 });
 
 app.listen(5000, function() {

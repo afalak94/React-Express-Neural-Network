@@ -15,7 +15,7 @@ class TextData extends Component {
           borderColor: "#094771",
           fontFamily: "arial",
           backgroundColor: "#094771",
-          color: "black"
+          color: "white"
         }}
         type="textarea"
         name="TextData"

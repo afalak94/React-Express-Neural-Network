@@ -9,9 +9,10 @@ import TextData from "./components/TextData";
 import ReferenceVideos from "./components/ReferenceVideos";
 import YTsearch from "youtube-api-search";
 import _ from "lodash";
+import config from "./config.js";
 
 //API key for youtube
-const API_KEY = "AIzaSyCSfVQ46iLqj4mb6Y6VrmjbvSFfozs2_mY";
+const API_KEY = config.config[0].API_KEY;
 
 class App extends Component {
   constructor(props) {

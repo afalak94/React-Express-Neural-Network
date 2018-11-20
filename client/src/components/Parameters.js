@@ -57,23 +57,16 @@ class Parameters extends Component {
     });
     const body = await response.json();
     this.setState({ responseToPost: body });
-    console.log(body);
-
-    // //send allData to server
-    // fetch("http://localhost:5000/calculate", {
-    //   method: "POST",
-    //   //mode: "no-cors",
-    //   body: JSON.stringify(allData),
-    //   headers: {
-    //     "Access-Control-Allow-Origin": "*",
-    //     "Content-Type": "application/json"
-    //   }
-    // })
-    //   .then(res => res.json())
-    //   .then(function(response) {
-    //     console.log("Request success: ", response);
-    //   })
-    //   .catch(error => console.error("Error: ", error));
+    console.log(this.state.responseToPost);
+    document.getElementById("TextData").value =
+      this.state.responseToPost[0] + "\n";
+    document.getElementById("TextData").value +=
+      this.state.responseToPost[1] + "\n";
+    document.getElementById("TextData").value +=
+      this.state.responseToPost[2] + "\n";
+    document.getElementById("TextData").value +=
+      this.state.responseToPost[3] + "\n";
+    document.getElementById("TextData").value += this.state.responseToPost[4];
   };
 
   setNetwork = e => {
