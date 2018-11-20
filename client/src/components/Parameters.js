@@ -11,6 +11,8 @@ import {
   DropdownItem
 } from "reactstrap";
 import RadioBtns from "./Radios";
+import graph3 from "../images/graph3.png";
+import noGraph from "../images/noGraph.png";
 import "../styles/parameters.css";
 
 class Parameters extends Component {
@@ -38,6 +40,10 @@ class Parameters extends Component {
   }
 
   calculate = async e => {
+    //set textarea and graph image to default
+    document.getElementById("TextData").value = "Calculating...";
+    document.querySelector("img").src = graph3;
+
     //collect all the data into a single object
     const allData = [
       this.state.networkSize,
@@ -48,6 +54,7 @@ class Parameters extends Component {
     ];
     //console.log(allData);
 
+    //fetch the neural network calculations from the backend
     const response = await fetch("/calculate", {
       method: "POST",
       headers: {
@@ -58,15 +65,46 @@ class Parameters extends Component {
     const body = await response.json();
     this.setState({ responseToPost: body });
     console.log(this.state.responseToPost);
-    document.getElementById("TextData").value =
-      this.state.responseToPost[0] + "\n";
-    document.getElementById("TextData").value +=
-      this.state.responseToPost[1] + "\n";
-    document.getElementById("TextData").value +=
-      this.state.responseToPost[2] + "\n";
-    document.getElementById("TextData").value +=
-      this.state.responseToPost[3] + "\n";
-    document.getElementById("TextData").value += this.state.responseToPost[4];
+    let size = this.state.responseToPost.length;
+    //fill textArea with results
+    document.getElementById("TextData").value = "";
+    for (let i = 0; i < size; i++) {
+      document.getElementById("TextData").value +=
+        this.state.responseToPost[i] + "\n";
+    }
+
+    //fetching the generated graph from the backend if user chose first option
+    if (
+      this.state.networkSize === "Calculate optimal network size automatically"
+    ) {
+      var url = "http://localhost:5000/file";
+      var options = {
+        method: "GET",
+        mode: "cors",
+        cache: "default"
+      };
+      var request = new Request(url);
+
+      fetch(request, options).then(response => {
+        response.arrayBuffer().then(buffer => {
+          var base64Flag = "data:image/png;base64,";
+          var imageStr = arrayBufferToBase64(buffer);
+
+          document.querySelector("img").src = base64Flag + imageStr;
+        });
+      });
+
+      function arrayBufferToBase64(buffer) {
+        var binary = "";
+        var bytes = [].slice.call(new Uint8Array(buffer));
+
+        bytes.forEach(b => (binary += String.fromCharCode(b)));
+
+        return window.btoa(binary);
+      }
+    } else {
+      document.querySelector("img").src = noGraph;
+    }
   };
 
   setNetwork = e => {
@@ -240,6 +278,7 @@ class Parameters extends Component {
               block
               style={{ marginTop: -35 }}
               onClick={this.calculate}
+              disabled={this.props.data === undefined ? true : false}
             >
               Train and test
             </Button>

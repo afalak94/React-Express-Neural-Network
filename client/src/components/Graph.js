@@ -6,7 +6,12 @@ class Graph extends Component {
     return (
       <div style={{ marginTop: 125, marginLeft: 50 }}>
         <img
-          style={{ borderRadius: 10 }}
+          id="graph"
+          style={{
+            borderRadius: 10,
+            width: 510,
+            height: 300
+          }}
           src={graph3}
           className="img-fluid"
           alt="Responsiveimg"

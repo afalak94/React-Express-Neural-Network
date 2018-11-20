@@ -6,7 +6,7 @@ import "../styles/loadBtn.css";
 export default class LoadBtn extends Component {
   constructor(props) {
     super(props);
-    this.state = { toggled: false, csv: undefined };
+    this.state = { toggled: false, text: "", csv: undefined };
   }
 
   handleClick() {
@@ -31,16 +31,29 @@ export default class LoadBtn extends Component {
     };
 
     const handleFileChosen = file => {
+      //check if file is in csv format
+      const fileInput = document.getElementById("file");
+      const filePath = fileInput.value;
+      const allowedExtensions = /(\.csv|\.xlsx|\.xls)$/i;
+      if (!allowedExtensions.exec(filePath)) {
+        alert("Please upload file having extensions .csv|.xlsx|.xls only.");
+        fileInput.value = "";
+        this.setState({ text: "Load data set" });
+        return false;
+      }
+
+      //file is in acceptable format -> read
       fileReader = new FileReader();
       fileReader.onloadend = handleFileRead;
-      fileReader.readAsText(file);
+      if (file !== undefined) {
+        fileReader.readAsText(file);
+      }
     };
 
-    let text = "test";
-    if (this.state.toggled && text) {
-      text = "Data set loaded";
+    if (this.state.toggled && this.state.text === "Load data set") {
+      this.state.text = "Data set loaded";
     } else {
-      text = "Load Data Set";
+      this.state.text = "Load data set";
     }
 
     return (
@@ -49,9 +62,10 @@ export default class LoadBtn extends Component {
           type="file"
           id="file"
           onChange={e => handleFileChosen(e.target.files[0])}
-          //value={this.state.csv}
+          accept=".csv"
+          pattern="^.+\.(xlsx|xls|csv)$"
         />
-        {text + " "}
+        {this.state.text + " "}
         <Octicon mega spin name="gear" style={{ marginLeft: 5 }} />
       </label>
     );

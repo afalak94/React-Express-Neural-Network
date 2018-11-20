@@ -8,7 +8,6 @@ import Graph from "./components/Graph";
 import TextData from "./components/TextData";
 import ReferenceVideos from "./components/ReferenceVideos";
 import YTsearch from "youtube-api-search";
-import _ from "lodash";
 import config from "./config.js";
 
 //API key for youtube
@@ -24,8 +23,7 @@ class App extends Component {
       videos3: [],
       videos4: [],
       selectedVideo: null,
-      data: undefined,
-      customers: []
+      data: undefined
     };
 
     this.videoSearch("Neural networks");
@@ -36,22 +34,27 @@ class App extends Component {
     this.getData = this.getData.bind(this);
   }
 
+  //when starting the App, connect to the backend server
   componentDidMount() {
-    fetch("/api/customers")
-      .then(res => res.json())
-      .then(customers =>
-        this.setState({ customers }, () =>
-          console.log("Customers fetched..", customers)
-        )
-      );
+    this.callApi()
+      .then(res => console.log(res.welcome))
+      .catch(err => console.log(err));
   }
+  callApi = async () => {
+    const response = await fetch("http://localhost:5000/api/welcome");
+    const body = await response.json();
+    if (response.status !== 200) throw Error(body.message);
+    return body;
+  };
 
+  //set data into state
   getData = val => {
     this.setState({ data: val }, function() {
       //console.log(this.state.data);
     });
   };
 
+  //search 4 youtube videos for rendering thumbnails and playing videos
   videoSearch(term) {
     if (term === "Neural networks") {
       YTsearch({ key: API_KEY, term: term, maxResults: 1 }, data => {
@@ -85,9 +88,6 @@ class App extends Component {
   }
 
   render() {
-    const videoSearch = _.debounce(term => {
-      this.videoSearch(term);
-    }, 1000);
     return (
       <div className="Component-Bg">
         <Navigation />

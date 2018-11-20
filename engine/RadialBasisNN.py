@@ -23,31 +23,61 @@ with warnings.catch_warnings():
     from sklearn.cross_validation import StratifiedShuffleSplit
 
 #GRAB PARAMETERS FOR RBFN
-hiddenSizeCalc = str(sys.argv[1])
-ManualHiddenSize = str(sys.argv[2])
-ManualNumber = sys.argv[3]
-if (int(ManualNumber) < 2 or int(ManualNumber) > 20):
-    print("You can choose between 2 and 20 centers for hidden layer size.")
-    exit()
+networkSizeType = str(sys.argv[1])
+ManualNumber = sys.argv[2]
+centers = str(sys.argv[3])
+spread = str(sys.argv[4]) 
+Dataset_raw = sys.argv[5]
 
-randomDp = str(sys.argv[4])
-kMeansCenters = str(sys.argv[5])
+#set bool values from parameters for future conditions
+if(networkSizeType == "Calculate optimal network size automatically"):
+    hiddenSizeCalc = 1
+    ManualHiddenSize = 0
+elif(networkSizeType == "Manually set network size"):
+    hiddenSizeCalc = 0
+    ManualHiddenSize = 1
 
-SigmaWidth = str(sys.argv[6])
-stdDevWidth = str(sys.argv[7])
+if(centers == "Set random data points as centers"):
+    randomDp = 1
+    kMeansCenters = 0
+elif(centers == "Use k-means clustering"):
+    randomDp = 0
+    kMeansCenters = 1
 
-Dataset_raw = sys.argv[8]
+if(spread == "Use equal spread"):
+    SigmaWidth = 1
+    stdDevWidth = 0
+elif(spread == "Use p-nearest neighbour heuristics"):
+    SigmaWidth = 0
+    stdDevWidth = 1
 
-param_list = [hiddenSizeCalc, ManualHiddenSize, randomDp, kMeansCenters, SigmaWidth, stdDevWidth]
-paramBool_list = []
-for item in param_list:
-    if (item == "true"):
-        item = 1
-    elif (item == "false"):
-        item = 0
-    paramBool_list.append(item)
 
-#print(Dataset)
+
+#hiddenSizeCalc = str(sys.argv[1])
+#ManualHiddenSize = str(sys.argv[2])
+# ManualNumber = sys.argv[3]
+# if (int(ManualNumber) < 2 or int(ManualNumber) > 20):
+#     print("You can choose between 2 and 20 centers for hidden layer size.")
+#     exit()
+
+#randomDp = str(sys.argv[4])
+#kMeansCenters = str(sys.argv[5])
+
+#SigmaWidth = str(sys.argv[6])
+#stdDevWidth = str(sys.argv[7])
+
+#Dataset_raw = sys.argv[8]
+
+paramBool_list = [hiddenSizeCalc, ManualHiddenSize, randomDp, kMeansCenters, SigmaWidth, stdDevWidth]
+# paramBool_list = []
+# for item in param_list:
+#     if (item == "true"):
+#         item = 1
+#     elif (item == "false"):
+#         item = 0
+#     paramBool_list.append(item)
+
+#print(paramBool_list)
 
 
 ####PREPROCESS OF THE DATASET######
@@ -91,6 +121,9 @@ def data_preprocess(raw_data):
 dataset = data_preprocess(Dataset_raw)
 numClasses = len(np.unique(dataset[:,-1]))
 
+#print(numClasses)
+#print(dataset)
+#sys.stdout.flush()
 
 #CHOOSING RANDOM PICKING OR K-MEANS CLUSTERING
 if (bool(paramBool_list[2] and (not paramBool_list[3]))):
@@ -307,7 +340,8 @@ class RBFNetwork:
         MSEepoch = np.zeros(shape=(0,0))
         for size in range(2, 21):
             MSE = np.zeros(shape=(0,0))
-            #print("Epoch: ", size-2)
+            print("Epoch: ", size-2)
+            sys.stdout.flush()
             self.train(size)
             #validationData, otherData = train_test_split(self.scaledData, test_size=0.5)
             kfold = KFold(10, True, 5)
@@ -401,7 +435,7 @@ class RBFNetwork:
         #self.accuracy = (correct_predictions / len(self.numClassLabels[1][:])) * 100
         #print ("Accuracy score: ", self.accuracy, "%")
         #self.MeanSquaredError()
-        self.conf_matrix()
+        self.conf_matrix_func()
         self.ClassificationReport()
 
         #printing results to txt file
@@ -412,7 +446,7 @@ class RBFNetwork:
         #self.ClassificationReport()
         
     #confusion matrix
-    def conf_matrix(self):
+    def conf_matrix_func(self):
         for item in self.testLabels:
         	self.testLabelsLine = np.append(self.testLabelsLine, item)
         #print (self.testLabelsLine)
@@ -520,5 +554,5 @@ elif ((bool((not paramBool_list[0]) and paramBool_list[1]))):
     print("F1 score: %0.5f (+/- %0.5f)" % (np.mean(F1), F1.std()))
     print("Precision: %0.5f (+/- %0.5f)" % (np.mean(Precision), Precision.std()))
 
-
+##RETURN RESULTS BACK
 sys.stdout.flush()
