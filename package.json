@@ -1,38 +1,21 @@
 {
   "name": "rbfn",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "bootstrap": "^4.1.3",
-    "lodash": "^4.17.11",
-    "python-shell": "^1.0.6",
-    "react": "^16.6.3",
-    "react-csv": "^1.0.18",
-    "react-dom": "^16.6.3",
-    "react-file-reader": "^1.1.4",
-    "react-octicon": "^3.0.1",
-    "react-scripts": "2.1.1",
-    "reactstrap": "^6.5.0",
-    "require": "^2.4.20",
-    "youtube-api-search": "0.0.5",
-    "youtube-search-api-with-axios": "^2.0.0"
-  },
+  "version": "1.0.0",
+  "description": "Boilerplate",
+  "main": "server.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "node server.js",
+    "server": "nodemon server.js"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "author": "Antonio Falak",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "concurrently": "^4.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.16.4"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
   "devDependencies": {
-    "react-video-thumbnail": "^0.1.3"
+    "nodemon": "^1.18.6"
   }
 }
