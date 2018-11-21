@@ -11,9 +11,9 @@ import {
   DropdownItem
 } from "reactstrap";
 import RadioBtns from "./Radios";
-import graph3 from "../images/graph3.png";
-import noGraph from "../images/noGraph.png";
 import "../styles/parameters.css";
+import noGraph from "../images//noGraph.png";
+import Graph from "../images//graph3.png";
 
 class Parameters extends Component {
   constructor(props) {
@@ -42,7 +42,7 @@ class Parameters extends Component {
   calculate = async e => {
     //set textarea and graph image to default
     document.getElementById("TextData").value = "Calculating...";
-    document.querySelector("img").src = graph3;
+    document.querySelector("img").src = Graph;
 
     //collect all the data into a single object
     const allData = [
@@ -66,7 +66,8 @@ class Parameters extends Component {
     this.setState({ responseToPost: body });
     console.log(this.state.responseToPost);
     let size = this.state.responseToPost.length;
-    //fill textArea with results
+
+    //fill textarea with results
     document.getElementById("TextData").value = "";
     for (let i = 0; i < size; i++) {
       document.getElementById("TextData").value +=
