@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Octicon from "react-octicon";
-import { Input } from "reactstrap";
+import { Input, Alert } from "reactstrap";
 import "../styles/loadBtn.css";
 
 export default class LoadBtn extends Component {
@@ -36,7 +36,8 @@ export default class LoadBtn extends Component {
       const filePath = fileInput.value;
       const allowedExtensions = /(\.csv|\.xlsx|\.xls)$/i;
       if (!allowedExtensions.exec(filePath)) {
-        alert("Please upload file having extensions .csv|.xlsx|.xls only.");
+        //alert("Please upload file having extensions .csv|.xlsx|.xls only.");
+        this.props.onDismiss();
         fileInput.value = "";
         this.setState({ text: "Load data set" });
         return false;
@@ -50,12 +51,6 @@ export default class LoadBtn extends Component {
       }
     };
 
-    if (this.state.toggled && this.state.text === "Load data set") {
-      this.state.text = "Data set loaded";
-    } else {
-      this.state.text = "Load data set";
-    }
-
     return (
       <label className="loadDatasetBtn">
         <Input
@@ -65,7 +60,9 @@ export default class LoadBtn extends Component {
           accept=".csv"
           pattern="^.+\.(xlsx|xls|csv)$"
         />
-        {this.state.text + " "}
+        {this.state.csv === undefined
+          ? (this.state.text = "Load data set")
+          : (this.state.text = "Data set loaded")}
         <Octicon mega spin name="gear" style={{ marginLeft: 5 }} />
       </label>
     );

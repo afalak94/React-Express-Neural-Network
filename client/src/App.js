@@ -7,6 +7,7 @@ import Parameters from "./components/Parameters";
 import Graph from "./components/Graph";
 import TextData from "./components/TextData";
 import ReferenceVideos from "./components/ReferenceVideos";
+import AlertComp from "./components/Alert";
 import YTsearch from "youtube-api-search";
 import config from "./config.js";
 
@@ -23,7 +24,8 @@ class App extends Component {
       videos3: [],
       videos4: [],
       selectedVideo: null,
-      data: undefined
+      data: undefined,
+      alert: false
     };
 
     this.videoSearch("Neural networks");
@@ -89,12 +91,20 @@ class App extends Component {
 
   render() {
     return (
-      <div className="Component-Bg">
+      <div className="Component-Bg" style={{ position: "relative" }}>
         <Navigation />
+        {this.state.alert === true ? (
+          <AlertComp onDismiss={() => this.setState({ alert: false })} />
+        ) : (
+          false
+        )}
 
         <Row>
           <Col xs="6" sm={{ size: 4, offset: 1 }}>
-            <LoadBtn onUpdate={this.getData} />
+            <LoadBtn
+              onUpdate={this.getData}
+              onDismiss={() => this.setState({ alert: true })}
+            />
             <Parameters data={this.state.data} />
           </Col>
           <Col xs="6" sm="4">
