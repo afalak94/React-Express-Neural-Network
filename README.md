@@ -4,7 +4,7 @@
 This is a web application created using React for frontend and Express for backend part. User can load csv file that contains
 some dataset. RBFNN is used as a classifier in this web application. Steps to make it work:
 
-###git clone https://github.com/afalak94/React-Express-Neural-Network.git
+### `git clone https://github.com/afalak94/React-Express-Neural-Network.git`
 will clone this repository. Then you need to build dependencies with:
 
 ### `npm install`
