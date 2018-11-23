@@ -1,10 +1,19 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Radial basis function neural network (RBFNN)
 
-In the project directory, you can run:
+This is a web application created using React for frontend and Express for backend part. User can load csv file that contains
+some dataset. RBFNN is used as a classifier in this web application. Steps to make it work:
 
-### `npm start`
+###git clone https://github.com/afalak94/React-Express-Neural-Network.git
+will clone this repository. Then you need to build dependencies with:
+
+### `npm install`
+
+Web application uses YouTube API for displaying thumbnails and playing videos so you will have to generate your API key. 
+After that, paste you API key inside `client/src/App.js`.
+
+### `npm run dev`
+will start both server and client. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -37,8 +46,4 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
