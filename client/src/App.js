@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import "./App.css";
+import "./App.scss";
 import { Row, Col } from "reactstrap";
+import { subscribeToTimer } from "./api";
 import Navigation from "./components/Navigation";
 import LoadBtn from "./components/loadBtn";
 import Parameters from "./components/Parameters";
@@ -12,11 +13,18 @@ import YTsearch from "youtube-api-search";
 import config from "./config.js";
 
 //API key for youtube
-const API_KEY = config.config[0].API_KEY;
+const API_KEY = config.config[0].API_KEY; //place your youtube API key here
 
 class App extends Component {
   constructor(props) {
     super(props);
+
+    //set state from server time
+    subscribeToTimer((err, timestamp) =>
+      this.setState({
+        timestamp
+      })
+    );
 
     this.state = {
       videos1: [],
@@ -25,9 +33,11 @@ class App extends Component {
       videos4: [],
       selectedVideo: null,
       data: undefined,
-      alert: false
+      alert: false,
+      timestamp: "time"
     };
 
+    //search for youtube videos
     this.videoSearch("Neural networks");
     this.videoSearch("radial basis");
     this.videoSearch("6 types classification algorithms");
@@ -52,7 +62,7 @@ class App extends Component {
   //set data into state
   getData = val => {
     this.setState({ data: val }, function() {
-      //console.log(this.state.data);
+      console.log(this.state.data);
     });
   };
 
@@ -91,7 +101,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="Component-Bg" style={{ position: "relative" }}>
+      <div className="app--background-image">
         <Navigation />
         {this.state.alert === true ? (
           <AlertComp onDismiss={() => this.setState({ alert: false })} />
@@ -112,6 +122,9 @@ class App extends Component {
             <TextData />
           </Col>
           <Col sm="3">
+            <div className="navigation__clock--position">
+              <p className="navigation__clock--style">{this.state.timestamp}</p>
+            </div>
             <ReferenceVideos
               onVideoSelect={selectedVideo => this.setState({ selectedVideo })}
               videos1={this.state.videos1}

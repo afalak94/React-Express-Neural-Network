@@ -80,14 +80,20 @@ paramBool_list = [hiddenSizeCalc, ManualHiddenSize, randomDp, kMeansCenters, Sig
 #print(paramBool_list)
 
 
+#print( Dataset_raw)
+#sys.stdout.flush()
+#exit()
+
+
 ####PREPROCESS OF THE DATASET######
 def data_preprocess(raw_data):
     # Read string files
     dataset = list()
-    csv_reader = csv.reader(raw_data.split('\n'), delimiter=',')
+    csv_reader = csv.reader(raw_data.split('\n'))
     for row in csv_reader:
         if not row:
             continue
+        #print(row)
         dataset.append(row)
     pd_data = pd.DataFrame(dataset)
 
@@ -340,8 +346,8 @@ class RBFNetwork:
         MSEepoch = np.zeros(shape=(0,0))
         for size in range(2, 21):
             MSE = np.zeros(shape=(0,0))
-            print("Epoch: ", size-2)
-            sys.stdout.flush()
+            #print("Epoch: ", size-2)
+            #sys.stdout.flush()
             self.train(size)
             #validationData, otherData = train_test_split(self.scaledData, test_size=0.5)
             kfold = KFold(10, True, 5)

@@ -4,16 +4,11 @@ import graph3 from "../images/graph3.png";
 class Graph extends Component {
   render() {
     return (
-      <div style={{ marginTop: 125, marginLeft: 50 }}>
+      <div className="graph--margin">
         <img
           id="graph"
-          style={{
-            borderRadius: 10,
-            width: 510,
-            height: 300
-          }}
           src={graph3}
-          className="img-fluid"
+          className="img-fluid graph__image"
           alt="Responsiveimg"
         />
       </div>

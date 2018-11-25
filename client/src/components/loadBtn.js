@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Octicon from "react-octicon";
-import { Input, Alert } from "reactstrap";
-import "../styles/loadBtn.css";
+import { Input } from "reactstrap";
 
 export default class LoadBtn extends Component {
   constructor(props) {
@@ -15,6 +14,7 @@ export default class LoadBtn extends Component {
     });
   }
 
+  //button that opens file explorer so that user can load csv file
   render() {
     let fileReader;
 
@@ -60,10 +60,16 @@ export default class LoadBtn extends Component {
           accept=".csv"
           pattern="^.+\.(xlsx|xls|csv)$"
         />
+        {/* If the file is loaded, change button text*/}
         {this.state.csv === undefined
           ? (this.state.text = "Load data set")
           : (this.state.text = "Data set loaded")}
-        <Octicon mega spin name="gear" style={{ marginLeft: 5 }} />
+        <Octicon
+          mega
+          spin
+          name="gear"
+          className="loadDatasetBtn__octicon--margin"
+        />
       </label>
     );
   }

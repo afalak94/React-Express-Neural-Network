@@ -1,0 +1,276 @@
+@import url(https://fonts.googleapis.com/css?family=Chakra+Petch|Changa|Open+Sans|Titillium+Web);
+$primary-color: #094771;
+$secondary-color: #17a2b8;
+$modal-font1: "Titillium Web";
+$modal-font2: "Open Sans";
+
+//APP
+.app--background-image {
+  height: 865px;
+  background-image: url(./bg-NN.jpg);
+  background-position: "center";
+  background-repeat: "no-repeat";
+  background-size: contain;
+  background-size: 100% 100%;
+  position: relative;
+}
+
+//NAVIGATION
+
+.navigation__clock--position {
+  margin-left: 290px;
+  margin-top: -50px;
+}
+
+.navigation__clock--style {
+  font-family: Changa, Arial, Helvetica, sans-serif;
+  font-size: 26px;
+  color: white;
+}
+
+.navigation__modal-button {
+  color: white !important;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.navigation__modal {
+  width: 1000px !important;
+  max-width: 1000px !important;
+  height: 600px !important;
+  max-height: 600px !important;
+
+  .navigation__modal-header {
+    font-family: $modal-font1 !important;
+  }
+
+  .navigation__modal-header--size {
+    font-size: 26px;
+    height: 32px;
+  }
+
+  .navigation__modal-body {
+    font-family: $modal-font2;
+  }
+
+  .button--right {
+    margin-right: 15px;
+  }
+
+  .navigation__modal--title-family {
+    font-family: $modal-font1 !important;
+    font-weight: bold;
+  }
+}
+
+//LOAD DATA SET BUTTON
+
+.loadDatasetBtn {
+  font-family: Chakra Petch;
+  font-weight: medium;
+  margin-top: 35px;
+  border-radius: 5px;
+  border-color: #17a2b8;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  background-color: #17a2b8;
+  height: 55px;
+  width: 240px;
+  font-size: 24px;
+  color: white;
+
+  input[type="file"] {
+    display: none;
+  }
+
+  .loadDatasetBtn__octicon--margin {
+    margin-left: 10px;
+  }
+}
+
+//PARAMETERS
+
+.jumbotron--color {
+  margin-top: 30px;
+  height: 600px;
+  border-radius: 10px !important;
+  background-color: $primary-color !important;
+  color: white;
+  font-family: Changa;
+
+  .jumbotron__header--border {
+    border-top: none;
+  }
+
+  .jumbotron__secondRadio {
+    margin-top: 15px;
+  }
+
+  .jumbotron__firstRadio {
+    margin-top: -15px;
+  }
+
+  .jumbotron__title--font {
+    font-family: Chakra Petch;
+    font-weight: medium;
+  }
+
+  .jumbotron__table--height {
+    height: 160px;
+  }
+
+  .jumbotron__titles {
+    font-family: Chakra Petch;
+    font-weight: normal;
+  }
+
+  .jumbotron__dropdown {
+    margin-left: 250px;
+    margin-top: -30px;
+  }
+
+  .jumbotron__dropdown-toggle {
+    min-width: 70px;
+    background-color: $secondary-color !important;
+    font-weight: bold;
+  }
+
+  .jumbotron__dropdown-menu {
+    overflow: auto;
+    max-height: 100px;
+    min-width: 70px;
+    max-width: 70px;
+    background-color: $secondary-color;
+    color: white;
+  }
+
+  .jumbotron__dropdownItem {
+    color: white;
+
+    &:hover {
+      background-color: $primary-color !important;
+      color: white;
+    }
+  }
+
+  .jumbotron__calculateBtn {
+    margin-top: -35px;
+    font-family: Chakra Petch;
+    font-size: 20px;
+  }
+}
+
+//GRAPH
+
+.graph--margin {
+  margin: 125px 0 0 50px;
+
+  .graph__image {
+    border-radius: 10px;
+    width: 510px;
+    height: 300px;
+  }
+}
+
+//TEXT AREA
+
+.textarea--styling {
+  resize: none !important;
+  width: 510px !important;
+  height: 280px !important;
+  margin-top: 25px;
+  margin-left: 50px;
+  border-radius: 10px;
+  border-color: $primary-color !important;
+  background-color: $primary-color !important;
+  color: white !important;
+  font-family: Changa;
+  font-weight: Light;
+  font-size: 18px !important;
+}
+
+//VIDEO LIST
+
+.videos--margin {
+  margin-left: 70px;
+  margin-top: 60px;
+  width: 300px;
+
+  .videos__learnMore {
+    color: white !important;
+    border-color: white !important;
+    margin-left: 50px;
+    margin-bottom: 10px;
+    font-family: Chakra Petch;
+  }
+
+  .videos__card--bg-color {
+    background-color: transparent;
+  }
+
+  .videos__card-title {
+    color: white;
+    font-family: Chakra Petch;
+  }
+
+  .videos__thumbnail {
+    background-color: transparent !important;
+    border: none !important;
+  }
+
+  .videos__description {
+    font-size: 14px;
+    margin-left: 10px;
+    background-color: transparent;
+    color: white;
+    margin-top: 10px;
+    font-family: Changa;
+
+    .videos__description--links {
+      color: white;
+
+      &:link {
+        background-color: transparent;
+        text-decoration: none;
+      }
+
+      &:hover {
+        background-color: transparent !important;
+        text-decoration: none !important;
+        cursor: pointer;
+      }
+
+      &:active {
+        color: yellow;
+        background-color: transparent;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.videos__modal {
+  width: 80vw !important;
+  max-width: 80vw !important;
+
+  .videos__modal--header {
+    font-family: $modal-font1 !important;
+  }
+
+  .embed-responsive {
+    margin-left: 200px !important;
+  }
+
+  .videos__modal--footer {
+    font-family: $modal-font2 !important;
+  }
+}
+
+//ALERT
+
+.alert__info {
+  position: absolute !important;
+  margin-left: 400px !important;
+  margin-top: 39px !important;
+}

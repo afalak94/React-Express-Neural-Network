@@ -17,16 +17,15 @@ class AlertComp extends React.Component {
     this.props.onDismiss();
   }
 
+  //display alert msg when user tries to load invalid file type
   render() {
     return (
       <Alert
+        className="alert__info"
         color="info"
         isOpen={this.state.visible}
         toggle={this.onDismiss}
         style={{
-          position: "absolute",
-          marginLeft: 400,
-          marginTop: 39,
           zIndex: 10
         }}
       >

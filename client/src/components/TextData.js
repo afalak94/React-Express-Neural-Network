@@ -2,24 +2,21 @@ import React, { Component } from "react";
 import { Input } from "reactstrap";
 
 class TextData extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data: "no data yet"
+    };
+  }
+  //text area for diplaying the results from neural network
   render() {
     return (
       <Input
-        style={{
-          resize: "none",
-          width: 510,
-          height: 280,
-          marginTop: 25,
-          marginLeft: 50,
-          borderRadius: 10,
-          borderColor: "#094771",
-          fontFamily: "arial",
-          backgroundColor: "#094771",
-          color: "white"
-        }}
         type="textarea"
         name="TextData"
         id="TextData"
+        className="textarea--styling"
         placeholder="Network results will be displayed here"
         disabled
       />

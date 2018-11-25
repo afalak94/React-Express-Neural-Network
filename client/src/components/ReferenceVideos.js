@@ -24,19 +24,12 @@ class ReferenceVideos extends React.Component {
     }
 
     return (
-      <div style={{ marginLeft: 70, marginTop: 50, width: 300 }}>
+      <div className="videos--margin">
         <Nav tabs>
           <NavItem>
-            <NavLink
-              style={{
-                color: "white",
-                borderColor: "white",
-                marginLeft: 55,
-                marginBottom: 10
-              }}
-            >
-              <Octicon mega name="arrow-down" />
-              Learn more {"   "}
+            <NavLink className="videos__learnMore">
+              <Octicon mega name="arrow-down" style={{ paddingLeft: 10 }} />
+              LEARN MORE {"   "}
               <Octicon mega name="arrow-down" style={{ marginLeft: 5 }} />
             </NavLink>
           </NavItem>
@@ -44,8 +37,13 @@ class ReferenceVideos extends React.Component {
         <TabContent>
           <TabPane>
             <Row>
-              <Card body style={{ backgroundColor: "transparent" }}>
-                <CardTitle style={{ color: "white", marginLeft: 60 }}>
+              <Card body className="videos__card--bg-color">
+                <CardTitle
+                  className="videos__card-title"
+                  style={{
+                    marginLeft: 60
+                  }}
+                >
                   Neural Networks
                 </CardTitle>
                 <VideoListItem
@@ -57,8 +55,13 @@ class ReferenceVideos extends React.Component {
             </Row>
 
             <Row>
-              <Card body style={{ backgroundColor: "transparent" }}>
-                <CardTitle style={{ color: "white", marginLeft: 110 }}>
+              <Card body className="videos__card--bg-color">
+                <CardTitle
+                  className="videos__card-title"
+                  style={{
+                    marginLeft: 110
+                  }}
+                >
                   RBFN
                 </CardTitle>
                 <VideoListItem
@@ -70,8 +73,13 @@ class ReferenceVideos extends React.Component {
             </Row>
 
             <Row>
-              <Card body style={{ backgroundColor: "transparent" }}>
-                <CardTitle style={{ color: "white", marginLeft: 80 }}>
+              <Card body className="videos__card--bg-color">
+                <CardTitle
+                  className="videos__card-title"
+                  style={{
+                    marginLeft: 80
+                  }}
+                >
                   Classification
                 </CardTitle>
                 <VideoListItem
@@ -83,8 +91,13 @@ class ReferenceVideos extends React.Component {
             </Row>
 
             <Row>
-              <Card body style={{ backgroundColor: "transparent" }}>
-                <CardTitle style={{ color: "white", marginLeft: 60 }}>
+              <Card body className="videos__card--bg-color">
+                <CardTitle
+                  className="videos__card-title"
+                  style={{
+                    marginLeft: 60
+                  }}
+                >
                   K-means clustering
                 </CardTitle>
                 <VideoListItem

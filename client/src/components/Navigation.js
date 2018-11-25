@@ -6,7 +6,7 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink //navbar
+  NavLink
 } from "reactstrap";
 import ModalExample from "./Modal";
 
@@ -27,10 +27,19 @@ class Navigation extends Component {
   render() {
     return (
       <div>
-        <Navbar light expand="md" style={{ backgroundColor: "#094771" }}>
+        <Navbar
+          light
+          expand="md"
+          style={{ backgroundColor: "#094771", fontFamily: "Chakra Petch" }}
+        >
           <NavbarBrand
             href="/"
-            style={{ fontSize: 20, marginLeft: 136, color: "white" }}
+            style={{
+              fontSize: 24,
+              marginLeft: 136,
+              color: "white",
+              fontFamily: "Chakra Petch"
+            }}
           >
             Radial Basis Function Neural Network
           </NavbarBrand>
@@ -47,9 +56,11 @@ class Navigation extends Component {
 
               <NavItem>
                 <NavLink
-                  href="https://github.com/reactstrap/reactstrap"
-                  style={{ color: "white" }}
+                  href="https://github.com/afalak94/React-Express-Neural-Network"
+                  target="_blank"
+                  style={{ color: "white", fontSize: 18 }}
                 >
+                  {" "}
                   GitHub
                 </NavLink>
               </NavItem>

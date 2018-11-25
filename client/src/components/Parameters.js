@@ -11,7 +11,6 @@ import {
   DropdownItem
 } from "reactstrap";
 import RadioBtns from "./Radios";
-import "../styles/parameters.css";
 import noGraph from "../images//noGraph.png";
 import Graph from "../images//graph3.png";
 
@@ -35,7 +34,6 @@ class Parameters extends Component {
     this.setSpread = this.setSpread.bind(this);
     this.makeNumbers = this.makeNumbers.bind(this);
     this.setNumber = this.setNumber.bind(this);
-
     this.toggle = this.toggle.bind(this);
   }
 
@@ -65,9 +63,9 @@ class Parameters extends Component {
     const body = await response.json();
     this.setState({ responseToPost: body });
     console.log(this.state.responseToPost);
-    let size = this.state.responseToPost.length;
 
     //fill textarea with results
+    let size = this.state.responseToPost.length;
     document.getElementById("TextData").value = "";
     for (let i = 0; i < size; i++) {
       document.getElementById("TextData").value +=
@@ -108,6 +106,7 @@ class Parameters extends Component {
     }
   };
 
+  //unlock dropdown when user clicks option to manually set network size
   setNetwork = e => {
     const radioValue = e.target.value;
     if (radioValue === "Manually set network size") {
@@ -147,9 +146,8 @@ class Parameters extends Component {
     for (let i = 2; i < 21; i++) {
       children.push(
         <DropdownItem
-          className="dropdownItem"
+          className="jumbotron__dropdownItem"
           key={i}
-          style={{ color: "white" }}
           onClick={e => {
             this.setNumber(e, i);
           }}
@@ -172,29 +170,20 @@ class Parameters extends Component {
   render() {
     return (
       <div>
-        <Jumbotron
-          fluid
-          style={{
-            marginTop: 30,
-            height: 600,
-            borderRadius: 10,
-            backgroundColor: "#094771",
-            color: "white"
-          }}
-        >
+        <Jumbotron fluid className="jumbotron--color">
           <Container style={{ marginTop: -60 }}>
             <Table>
               <thead>
                 <tr>
-                  <th style={{ borderTop: "none" }}>
-                    <h1>Parameters</h1>
+                  <th className="jumbotron__header--border">
+                    <h1 className="jumbotron__title--font">Parameters</h1>
                   </th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style={{ height: 160 }}>
-                    <h3>Network size</h3>
+                  <td className="jumbotron__table--height">
+                    <h3 className="jumbotron__titles">Network size</h3>
                     <Form>
                       <RadioBtns
                         first="Calculate optimal network size automatically"
@@ -205,39 +194,23 @@ class Parameters extends Component {
                     </Form>
 
                     <Dropdown
+                      className="jumbotron__dropdown"
                       isOpen={this.state.dropdownOpen}
                       toggle={this.toggle}
-                      style={{ marginLeft: 250, marginTop: -30 }}
                     >
                       <DropdownToggle
+                        className="jumbotron__dropdown-toggle"
                         caret
                         disabled={!this.state.dropdownAvailable}
-                        style={{
-                          minWidth: 70,
-                          backgroundColor: "#17A2B8",
-                          fontWeight: "bold"
-                        }}
                       >
                         {this.state.dropdownNumber}
                       </DropdownToggle>
                       <DropdownMenu
+                        className="jumbotron__dropdown-menu"
                         modifiers={{
                           setMaxHeight: {
                             enabled: true,
-                            order: 890,
-                            fn: data => {
-                              return {
-                                ...data,
-                                styles: {
-                                  ...data.styles,
-                                  overflow: "auto",
-                                  maxHeight: 100,
-                                  minWidth: 70,
-                                  maxWidth: 70,
-                                  backgroundColor: "#17A2B8"
-                                }
-                              };
-                            }
+                            order: 890
                           }
                         }}
                       >
@@ -247,8 +220,8 @@ class Parameters extends Component {
                   </td>
                 </tr>
                 <tr>
-                  <td style={{ height: 160 }}>
-                    <h3>Center locations</h3>
+                  <td className="jumbotron__table--height">
+                    <h3 className="jumbotron__titles">Center locations</h3>
                     <Form>
                       <RadioBtns
                         first="Set random data points as centers"
@@ -260,8 +233,8 @@ class Parameters extends Component {
                   </td>
                 </tr>
                 <tr>
-                  <td style={{ height: 160 }}>
-                    <h3>Spread</h3>
+                  <td className="jumbotron__table--height">
+                    <h3 className="jumbotron__titles">Spread</h3>
                     <Form>
                       <RadioBtns
                         first="Use equal spread"
@@ -275,9 +248,9 @@ class Parameters extends Component {
               </tbody>
             </Table>
             <Button
+              className="jumbotron__calculateBtn"
               color="info"
               block
-              style={{ marginTop: -35 }}
               onClick={this.calculate}
               disabled={this.props.data === undefined ? true : false}
             >

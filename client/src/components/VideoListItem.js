@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Button, Modal, ModalHeader, ModalBody } from "reactstrap"; //modals
-import "../styles/videoText.css";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap"; //modals
 
 class VideoListItem extends Component {
   constructor(props) {
@@ -18,6 +17,7 @@ class VideoListItem extends Component {
     });
   }
 
+  //create modal that will play chosen youtube video
   render() {
     const video = this.props.video;
     const imgUrl = video.snippet.thumbnails.default.url;
@@ -27,29 +27,14 @@ class VideoListItem extends Component {
     return (
       <div className="video-list media" style={{ marginTop: -10 }}>
         <div className="media-left">
-          <Button
-            onClick={this.toggle}
-            style={{
-              backgroundColor: "transparent",
-              border: "none"
-            }}
-          >
+          <Button className="videos__thumbnail" onClick={this.toggle}>
             <img className="media-object" src={imgUrl} />
           </Button>
         </div>
 
         <div className="media-body">
-          <div
-            className="media-heading"
-            style={{
-              fontSize: "14px",
-              marginLeft: 10,
-              backgroundColor: "transparent",
-              color: "white",
-              marginTop: 10
-            }}
-          >
-            <a onClick={this.toggle} className="links">
+          <div className="media-heading videos__description">
+            <a onClick={this.toggle} className="videos__description--links">
               {video.snippet.title}
             </a>
           </div>
@@ -59,9 +44,11 @@ class VideoListItem extends Component {
           isOpen={this.state.modal}
           toggle={this.toggle}
           video={this.props.video}
-          className="myModal"
+          className="videos__modal"
         >
-          <ModalHeader toggle={this.toggle}>{video.snippet.title}</ModalHeader>
+          <ModalHeader toggle={this.toggle} className="videos__modal--header">
+            {video.snippet.title}
+          </ModalHeader>
           <ModalBody className="modal-body">
             {/* Embedding youtube video in modal body*/}
             <div className="video-detail col-md-8">
@@ -74,6 +61,11 @@ class VideoListItem extends Component {
               </div>
             </div>
           </ModalBody>
+          <ModalFooter className="videos__modal--footer">
+            <Button color="secondary" onClick={this.toggle}>
+              Cancel
+            </Button>
+          </ModalFooter>
         </Modal>
       </div>
     );
