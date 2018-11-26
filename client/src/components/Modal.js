@@ -66,13 +66,21 @@ class ModalExample extends Component {
           </p>
           <ul>
             <li>
-              <a href="http://archive.ics.uci.edu/ml/index.php" target="_blank">
+              <a
+                href="http://archive.ics.uci.edu/ml/index.php"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 UCI Machine Learning Repository
               </a>
             </li>
 
             <li>
-              <a href="https://www.kaggle.com/" target="_blank">
+              <a
+                href="https://www.kaggle.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Kaggle
               </a>
             </li>
